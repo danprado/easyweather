@@ -117,7 +117,7 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
 
     private void setupDayForecast(DailyWeatherView dailyWeatherView, Data data) {
         dailyWeatherView.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(data.time));
-        dailyWeatherView.setDayWeather(data.icon);
+        dailyWeatherView.setDayWeatherImage(WeatherUtils.getWeatherIconResourceFromString(data.icon));
         dailyWeatherView.setMaxDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMax));
         dailyWeatherView.setMinDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMin));
     }

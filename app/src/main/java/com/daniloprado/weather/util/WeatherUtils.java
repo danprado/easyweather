@@ -1,7 +1,6 @@
 package com.daniloprado.weather.util;
 
 import com.daniloprado.weather.R;
-import com.google.gson.internal.Streams;
 
 public abstract class WeatherUtils {
 

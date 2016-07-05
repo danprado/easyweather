@@ -44,9 +44,9 @@ public class DailyWeatherView extends FrameLayout {
         textViewDayOfTheWeek.setText(dayOfTheWeek);
     }
 
-    public void setDayWeather(String dayWeather) {
+    public void setDayWeatherImage(int weatherImageResource) {
         imageViewDayWeather.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                WeatherUtils.getWeatherIconResourceFromString(dayWeather),
+                weatherImageResource,
                 null));
     }
 
