@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daniloprado.weather.R;
-import com.daniloprado.weather.util.WeatherUtils;
 
 public class DailyWeatherView extends FrameLayout {
 
@@ -33,7 +32,7 @@ public class DailyWeatherView extends FrameLayout {
     }
 
     private void init(Context context) {
-        inflate(context, R.layout.daily_weather_view, this);
+        inflate(context, R.layout.custom_view_daily_weather, this);
         textViewDayOfTheWeek = (TextView) findViewById(R.id.textview_day_of_the_week);
         imageViewDayWeather = (ImageView) findViewById(R.id.imageview_day_weather);
         textViewDayMaxTemp = (TextView) findViewById(R.id.textview_day_max_temp);

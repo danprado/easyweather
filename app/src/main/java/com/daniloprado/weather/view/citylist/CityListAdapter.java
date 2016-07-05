@@ -54,7 +54,6 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
         @BindView(R.id.card_container) View cardContainer;
         @BindView(R.id.textview_city_name) TextView cityName;
-        @BindView(R.id.textview_current_city_temp) TextView currentTemp;
 
         public ViewHolder(View v) {
             super(v);

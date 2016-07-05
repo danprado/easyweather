@@ -2,6 +2,7 @@ package com.daniloprado.weather.dagger;
 
 import com.daniloprado.weather.dagger.module.PresenterModule;
 import com.daniloprado.weather.dagger.module.RepositoryModule;
+import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
 import com.daniloprado.weather.view.main.MainActivity;
 import com.daniloprado.weather.dagger.module.ApplicationModule;
 import com.daniloprado.weather.dagger.module.NetworkModule;
@@ -26,5 +27,6 @@ public interface DiComponent {
     void inject(MainActivity activity);
     void inject(CityListFragment fragment);
     void inject(CityForecastFragment fragment);
+    void inject(CityAddDialogFragment fragment);
 
 }

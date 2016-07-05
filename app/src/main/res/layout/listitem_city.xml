@@ -22,21 +22,12 @@
         <TextView
             android:id="@+id/textview_city_name"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_medium"
             android:textColor="@color/bluish_white"
-            tools:text="City"/>
-
-        <TextView
-            android:id="@+id/textview_current_city_temp"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_large"
-            android:textColor="@color/bluish_white"
-            android:text="--º"
-            tools:text="16º"/>
+            tools:text="Dublin"/>
     </RelativeLayout>
 
 </LinearLayout>

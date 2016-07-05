@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.view.base.BaseActivity;
 import com.daniloprado.weather.view.base.ContractFragment;
+import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
 import com.daniloprado.weather.view.cityforecast.CityForecastFragment;
 import com.daniloprado.weather.view.citylist.CityListFragment;
 
@@ -33,7 +35,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getDiComponent().inject(this);
         init();
@@ -49,8 +51,13 @@ public class MainActivity extends BaseActivity
     }
 
     private void setupUi() {
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(view -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            CityAddDialogFragment newFragment = new CityAddDialogFragment();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
+        });
     }
 
     private void setupCityListFragment() {

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">weather</string>
     <string name="action_settings">Settings</string>
+    <string name="hint_city">City</string>
+    <string name="menu_item_title_save">Save</string>
+    <string name="toolbar_title_add_city">Add city</string>
 </resources>

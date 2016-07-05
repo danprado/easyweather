@@ -2,6 +2,8 @@ package com.daniloprado.weather.dagger.module;
 
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.data.repository.ForecastRepository;
+import com.daniloprado.weather.view.cityadd.CityAddContract;
+import com.daniloprado.weather.view.cityadd.CityAddPresenter;
 import com.daniloprado.weather.view.cityforecast.CityForecastContract;
 import com.daniloprado.weather.view.cityforecast.CityForecastPresenter;
 import com.daniloprado.weather.view.citylist.CityListContract;
@@ -21,6 +23,11 @@ public class PresenterModule {
     @Provides
     CityForecastContract.Presenter provideCityForecastPresenter(ForecastRepository forecastRepository) {
         return new CityForecastPresenter(forecastRepository);
+    }
+
+    @Provides
+    CityAddContract.Presenter provideCityAddPresenter(CityRepository cityRepository) {
+        return new CityAddPresenter(cityRepository);
     }
 
 }
