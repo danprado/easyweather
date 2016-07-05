@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_normal"
-        android:layout_marginBottom="@dimen/margin_large"
-        android:background="@color/almost_white"
+        android:layout_marginBottom="@dimen/margin_micro"
+        android:background="@color/light_blue"
         android:clickable="true"
         android:elevation="@dimen/elevation_micro"
         android:focusable="true"
@@ -25,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_medium"
+            android:textColor="@color/bluish_white"
             tools:text="City"/>
 
         <TextView
@@ -33,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_large"
+            android:textColor="@color/bluish_white"
             android:text="--º"
             tools:text="16º"/>
     </RelativeLayout>

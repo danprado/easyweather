@@ -57,7 +57,8 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
     DailyWeatherView dailyWeatherViewDayFive;
 
     @Inject CityForecastContract.Presenter presenter;
-    private City city;
+
+    private City city = new City();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,9 +80,11 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
         presenter.loadData(city);
     }
 
-    public void loadArgs() {
+    private void loadArgs() {
         Bundle bundle = getArguments();
-        city = (City) bundle.getSerializable("city");
+        if (bundle.containsKey(City.KEY)) {
+            city = (City) bundle.getSerializable(City.KEY);
+        }
     }
 
     @Override
