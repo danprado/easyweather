@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.data.dto.ForecastDto;
 import com.daniloprado.weather.model.City;
+import com.daniloprado.weather.model.weather.Data;
 import com.daniloprado.weather.util.DateUtils;
 import com.daniloprado.weather.util.WeatherUtils;
 import com.daniloprado.weather.view.base.ContractFragment;
@@ -107,30 +108,18 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
                 WeatherUtils.getWeatherIconResourceFromString(dto.currently.icon),
                 null));
 
-        dailyWeatherViewDayOne.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(dto.daily.data.get(1).time));
-        dailyWeatherViewDayOne.setDayWeather(dto.daily.data.get(1).icon);
-        dailyWeatherViewDayOne.setMaxDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(1).temperatureMax));
-        dailyWeatherViewDayOne.setMinDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(1).temperatureMin));
+        setupDayForecast(dailyWeatherViewDayOne, dto.daily.data.get(1));
+        setupDayForecast(dailyWeatherViewDayTwo, dto.daily.data.get(2));
+        setupDayForecast(dailyWeatherViewDayThree, dto.daily.data.get(3));
+        setupDayForecast(dailyWeatherViewDayFour, dto.daily.data.get(4));
+        setupDayForecast(dailyWeatherViewDayFive, dto.daily.data.get(5));
+    }
 
-        dailyWeatherViewDayOne.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(dto.daily.data.get(2).time));
-        dailyWeatherViewDayTwo.setDayWeather(dto.daily.data.get(2).icon);
-        dailyWeatherViewDayTwo.setMaxDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(2).temperatureMax));
-        dailyWeatherViewDayTwo.setMinDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(2).temperatureMin));
-
-        dailyWeatherViewDayOne.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(dto.daily.data.get(3).time));
-        dailyWeatherViewDayThree.setDayWeather(dto.daily.data.get(3).icon);
-        dailyWeatherViewDayThree.setMaxDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(3).temperatureMax));
-        dailyWeatherViewDayThree.setMinDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(3).temperatureMin));
-
-        dailyWeatherViewDayOne.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(dto.daily.data.get(4).time));
-        dailyWeatherViewDayFour.setDayWeather(dto.daily.data.get(4).icon);
-        dailyWeatherViewDayFour.setMaxDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(4).temperatureMax));
-        dailyWeatherViewDayFour.setMinDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(4).temperatureMin));
-
-        dailyWeatherViewDayOne.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(dto.daily.data.get(5).time));
-        dailyWeatherViewDayFive.setDayWeather(dto.daily.data.get(5).icon);
-        dailyWeatherViewDayFive.setMaxDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(5).temperatureMax));
-        dailyWeatherViewDayFive.setMinDayTemp(WeatherUtils.getFormattedTemperature(dto.daily.data.get(5).temperatureMin));
+    private void setupDayForecast(DailyWeatherView dailyWeatherView, Data data) {
+        dailyWeatherView.setDayOfTheWeek(DateUtils.getDayOfTheWeekFromUnixTime(data.time));
+        dailyWeatherView.setDayWeather(data.icon);
+        dailyWeatherView.setMaxDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMax));
+        dailyWeatherView.setMinDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMin));
     }
 
 }
