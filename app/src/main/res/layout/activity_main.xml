@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/toolbar"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -21,7 +21,6 @@
         android:id="@+id/root_content"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:paddingTop="@dimen/recyclerview_top_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton

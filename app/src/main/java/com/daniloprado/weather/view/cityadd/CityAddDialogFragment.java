@@ -11,20 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AutoCompleteTextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.view.base.BaseDialogFragment;
-import com.daniloprado.weather.view.citylist.CityListAdapter;
 
 import java.util.List;
 
@@ -55,7 +51,7 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dialog_city_add, container, false);
+        return inflater.inflate(R.layout.fragment_dialog_city_add, container, false);
     }
 
     @Override

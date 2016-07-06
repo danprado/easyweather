@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
         <include
-            layout="@layout/layout_city_add_toolbar"
+            layout="@layout/toolbar_city_search"
             android:id="@+id/toolbar"/>
     </android.support.design.widget.AppBarLayout>
 

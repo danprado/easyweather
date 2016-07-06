@@ -4,4 +4,6 @@
     <string name="hint_city">City</string>
     <string name="menu_item_title_save">Save</string>
     <string name="toolbar_title_add_city">Add city</string>
+    <string name="label_could_not_load_data">Could not load data</string>
+    <string name="label_tap_to_retry">Tap to retry</string>
 </resources>

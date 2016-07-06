@@ -14,72 +14,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ViewFlipper
+            android:id="@+id/viewflipper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardview_current_weather"
-                android:theme="@style/WeatherCardView"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swiperefreshlayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:elevation="@dimen/elevation_normal">
-
-                <RelativeLayout
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/content_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_normal"
-                    android:background="@color/light_blue">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textview_temperature"
-                        android:layout_width="wrap_content"
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview_current_weather"
+                        android:theme="@style/WeatherCardView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="@dimen/textSize_extra_extra_large"
-                        tools:text="18º"/>
+                        android:layout_marginBottom="@dimen/margin_normal"
+                        android:elevation="@dimen/elevation_normal">
 
-                    <TextView
-                        android:id="@+id/textview_city_name"
-                        android:layout_width="wrap_content"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/padding_normal"
+                            android:background="@color/light_blue">
+
+                            <TextView
+                                android:id="@+id/textview_temperature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/textSize_extra_extra_large"
+                                tools:text="18º"/>
+
+                            <TextView
+                                android:id="@+id/textview_city_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/textview_temperature"
+                                android:textSize="@dimen/textSize_extra_large"
+                                tools:text="Dublin"/>
+
+                            <TextView
+                                android:id="@+id/textview_current_city_weather"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/textview_city_name"
+                                android:textSize="@dimen/textSize_normal"
+                                tools:text="Sunny"/>
+
+                            <ImageView
+                                android:id="@+id/imageview_current_day_weather"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                tools:src="@drawable/ic_sun"/>
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview_five_days_forecast"
+                        android:theme="@style/DailyForecastCardView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@id/textview_temperature"
-                        android:textSize="@dimen/textSize_extra_large"
-                        tools:text="Dublin"/>
+                        android:layout_marginBottom="@dimen/margin_normal"
+                        android:elevation="@dimen/elevation_normal">
 
-                    <TextView
-                        android:id="@+id/textview_current_city_weather"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@id/textview_city_name"
-                        android:textSize="@dimen/textSize_normal"
-                        tools:text="Sunny"/>
+                        <include layout="@layout/five_days_weather_view"/>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </android.support.v4.widget.SwipeRefreshLayout>
 
-                    <ImageView
-                        android:id="@+id/imageview_current_day_weather"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        tools:src="@drawable/ic_sun"/>
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            <include layout="@layout/loading_layout"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardview_five_days_forecast"
-                android:theme="@style/DailyForecastCardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:elevation="@dimen/elevation_normal">
-
-                <include layout="@layout/layout_five_days_weather_view"/>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+            <include layout="@layout/error_layout"/>
+        </ViewFlipper>
     </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
