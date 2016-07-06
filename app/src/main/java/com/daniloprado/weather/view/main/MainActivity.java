@@ -2,13 +2,11 @@ package com.daniloprado.weather.view.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
@@ -38,6 +36,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getDiComponent().inject(this);
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
         init();
 
         if (savedInstanceState == null) {
@@ -64,7 +63,8 @@ public class MainActivity extends BaseActivity
         addContentFragment(new CityListFragment());
     }
 
-    private void setupCityFragment(City city) {
+    private void setupCityForecastFragment(City city) {
+        fab.setVisibility(View.GONE);
         CityForecastFragment cityForecastFragment = new CityForecastFragment();
         Bundle args = new Bundle();
         args.putSerializable("city", city);
@@ -110,11 +110,15 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onCitySelected(City city) {
-        setupCityFragment(city);
+        setupCityForecastFragment(city);
     }
 
     @Override
     public void onBackStackChanged() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            fab.setVisibility(View.VISIBLE);
+        }
+
         shouldDisplayHomeUp();
     }
 

@@ -9,7 +9,7 @@ public class City extends BaseModel {
 
     public static String KEY = "city";
 
-    @DatabaseField(id = true, generatedId = true)
+    @DatabaseField(generatedId = true)
     public int id;
 
     @DatabaseField

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
+import com.daniloprado.weather.data.db.DatabaseManager;
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.util.PlaceUtils;
@@ -25,6 +26,7 @@ public class CityRepositoryImpl implements CityRepository {
     @Inject
     public CityRepositoryImpl(Context context) {
         this.context = context;
+        DatabaseManager.init(context);
     }
 
     @Override
@@ -32,15 +34,7 @@ public class CityRepositoryImpl implements CityRepository {
         Observable.OnSubscribe<List<City>> onSubscribe = subscriber -> {
             try {
                 if (!subscriber.isUnsubscribed()) {
-                    List<City> cityList = new ArrayList<>();
-                    for (int i = 1; i < 4; i++) {
-                        City city = new City();
-                        city.name = "City " + String.valueOf(i);
-                        city.latitude = 1;
-                        city.longitude = 1;
-                        cityList.add(city);
-                    }
-                    subscriber.onNext(cityList);
+                    subscriber.onNext(DatabaseManager.getInstance().getAllCities());
                     subscriber.onCompleted();
                 }
             } catch (Exception e) {
