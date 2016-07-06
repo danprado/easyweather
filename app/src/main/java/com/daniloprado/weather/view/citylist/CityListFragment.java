@@ -53,7 +53,7 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
-        CityListAdapter adapter = new CityListAdapter(getActivity(),
+        CityListAdapter adapter = new CityListAdapter(
                 cityList,
                 city -> getContract().onCitySelected(city));
         recyclerView.setAdapter(adapter);

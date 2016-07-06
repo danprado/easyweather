@@ -17,8 +17,8 @@ import dagger.Provides;
 public class RepositoryModule {
 
     @Provides
-    CityRepository provideCityRepository() {
-        return new CityRepositoryImpl();
+    CityRepository provideCityRepository(Context context) {
+        return new CityRepositoryImpl(context);
     }
 
     @Provides

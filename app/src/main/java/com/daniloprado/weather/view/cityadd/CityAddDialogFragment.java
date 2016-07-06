@@ -6,6 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +19,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.EditText;
 
 import com.daniloprado.weather.R;
+import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.view.base.BaseDialogFragment;
+import com.daniloprado.weather.view.citylist.CityListAdapter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,8 +38,11 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.autocompletetextview_city)
-    AutoCompleteTextView autoCompleteTextViewCity;
+    @BindView(R.id.edittext_toolbar_city_search)
+    EditText editTextCitySearch;
+
+    @BindView(R.id.recyclerview_cities_found)
+    RecyclerView recyclerView;
 
     @Inject CityAddPresenter presenter;
 
@@ -43,19 +55,7 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.dialog_city_add, container, false);
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            toolbar.setTitle(R.string.toolbar_title_add_city);
-            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-            ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setHomeButtonEnabled(true);
-                actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
-            }
-        }
-        return rootView;
+        return inflater.inflate(R.layout.dialog_city_add, container, false);
     }
 
     @Override
@@ -63,6 +63,40 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         presenter.setView(this);
+        initToolbar();
+        setupUi();
+    }
+
+    private void initToolbar() {
+        setHasOptionsMenu(true);
+        if (toolbar != null) {
+            toolbar.setTitle(R.string.toolbar_title_add_city);
+            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+            ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeButtonEnabled(true);
+            }
+        }
+    }
+
+    private void setupUi() {
+        editTextCitySearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.searchCities(editable.toString());
+            }
+        });
     }
 
     @NonNull
@@ -74,23 +108,26 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_dialog_city_add, menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_save) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             dismiss();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setupRecyclerViewAdapter(List<City> cityList) {
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setHasFixedSize(true);
+        CitySearchAdapter adapter = new CitySearchAdapter(
+                cityList,
+                city -> presenter.setSelectedCity(city));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -100,6 +137,21 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
 
     @Override
     public void showErrorNoCitySelected() {
+
+    }
+
+    @Override
+    public void showErrorLayout() {
+
+    }
+
+    @Override
+    public void showEmptyLayout() {
+
+    }
+
+    @Override
+    public void showContentLayout() {
 
     }
 }

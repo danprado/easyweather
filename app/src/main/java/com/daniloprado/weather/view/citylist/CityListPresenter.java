@@ -29,22 +29,12 @@ public class CityListPresenter implements CityListContract.Presenter {
     @Override
     public void loadData() {
         view.showLoadingLayout();
-        cityRepository.getCities().subscribe(new Subscriber<List<City>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                view.showErrorLayout();
-            }
-
-            @Override
-            public void onNext(List<City> cityList) {
-                CityListPresenter.this.cityList = cityList;
-                refreshUi();
-            }
+        cityRepository.getCities().subscribe(cities -> {
+            cityList = cities;
+            refreshUi();
+        }, throwable -> {
+            throwable.printStackTrace();
+            view.showErrorLayout();
         });
     }
 
@@ -53,8 +43,8 @@ public class CityListPresenter implements CityListContract.Presenter {
         if (cityList != null && cityList.isEmpty()) {
             view.showEmptyLayout();
         } else {
-            view.showContentLayout();
             view.setupRecyclerViewAdapter(cityList);
+            view.showContentLayout();
         }
     }
 }
