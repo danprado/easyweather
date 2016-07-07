@@ -1,11 +1,14 @@
 package com.daniloprado.weather.view.main;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.daniloprado.weather.R;
@@ -26,10 +29,6 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +45,6 @@ public class MainActivity extends BaseActivity
 
     private void init() {
         initToolbar();
-        setupUi();
-    }
-
-    private void setupUi() {
-        fab.setOnClickListener(view -> {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            CityAddDialogFragment newFragment = new CityAddDialogFragment();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
-        });
     }
 
     private void setupCityListFragment() {
@@ -64,7 +52,6 @@ public class MainActivity extends BaseActivity
     }
 
     private void setupCityForecastFragment(City city) {
-        fab.setVisibility(View.GONE);
         CityForecastFragment cityForecastFragment = new CityForecastFragment();
         Bundle args = new Bundle();
         args.putSerializable("city", city);
@@ -100,6 +87,18 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             super.onBackPressed();
@@ -114,18 +113,13 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void onBackStackChanged() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            fab.setVisibility(View.VISIBLE);
-        }
-
-        shouldDisplayHomeUp();
+    public void onCityAddDialogDismissed() {
+        initToolbar();
     }
 
     @Override
-    public boolean onNavigateUp() {
-        getSupportFragmentManager().popBackStack();
-        return true;
+    public void onBackStackChanged() {
+        shouldDisplayHomeUp();
     }
 
     public void shouldDisplayHomeUp(){

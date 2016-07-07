@@ -1,5 +1,7 @@
 package com.daniloprado.weather.dagger.module;
 
+import android.content.Context;
+
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.data.repository.ForecastRepository;
 import com.daniloprado.weather.view.cityadd.CityAddContract;
@@ -26,8 +28,8 @@ public class PresenterModule {
     }
 
     @Provides
-    CityAddContract.Presenter provideCityAddPresenter(CityRepository cityRepository) {
-        return new CityAddPresenter(cityRepository);
+    CityAddContract.Presenter provideCityAddPresenter(CityRepository cityRepository, Context context) {
+        return new CityAddPresenter(cityRepository, context);
     }
 
 }

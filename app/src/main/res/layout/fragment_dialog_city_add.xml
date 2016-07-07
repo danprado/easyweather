@@ -27,14 +27,19 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_cities_found"
+        <ViewFlipper
+            android:id="@+id/viewflipper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/listitem_city_add">
+            android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_cities_found"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/listitem_city_add"/>
 
+            <include layout="@layout/error_layout"/>
+        </ViewFlipper>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

@@ -11,8 +11,8 @@ public interface CityAddContract {
         void close();
         void showErrorNoCitySelected();
         void showErrorLayout();
-        void showEmptyLayout();
         void showContentLayout();
+        void setSelectedCity(City city);
         void setupRecyclerViewAdapter(List<City> cityList);
 
     }
@@ -20,7 +20,7 @@ public interface CityAddContract {
     interface Presenter {
 
         void setView(CityAddContract.View view);
-        void setSelectedCity(City city);
+        void onCitySelected(City city);
         void searchCities(String query);
         void refreshUi();
         void saveCity();

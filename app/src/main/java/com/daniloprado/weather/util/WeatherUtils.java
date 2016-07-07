@@ -2,7 +2,9 @@ package com.daniloprado.weather.util;
 
 import com.daniloprado.weather.R;
 
-public abstract class WeatherUtils {
+public final class WeatherUtils {
+
+    private WeatherUtils() {}
 
     public static String getFormattedTemperature(Double temp) {
         return String.valueOf(temp.intValue()) + "º";

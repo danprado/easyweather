@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ViewFlipper
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewflipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefreshlayout"
+    <ViewFlipper
+        android:id="@+id/viewflipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
@@ -23,10 +23,18 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/listitem_city"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
 
-    <include layout="@layout/loading_layout"/>
+        <include layout="@layout/loading_layout"/>
 
-    <include layout="@layout/error_layout"/>
+        <include layout="@layout/error_layout"/>
 
-</ViewFlipper>
+    </ViewFlipper>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+</android.support.design.widget.CoordinatorLayout>

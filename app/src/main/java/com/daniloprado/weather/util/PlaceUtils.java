@@ -2,7 +2,9 @@ package com.daniloprado.weather.util;
 
 import android.location.Address;
 
-public abstract class PlaceUtils {
+public final class PlaceUtils {
+
+    private PlaceUtils() {}
 
     public static String getCityDescription(Address address) {
         String description = address.getLocality();

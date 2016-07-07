@@ -1,9 +1,12 @@
 package com.daniloprado.weather.view.cityadd;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +20,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ViewFlipper;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
+import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.view.base.BaseDialogFragment;
 
 import java.util.List;
@@ -31,16 +37,29 @@ import butterknife.ButterKnife;
 
 public class CityAddDialogFragment extends BaseDialogFragment implements CityAddContract.View {
 
+    public static int REQUEST_CODE = 1;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @BindView(R.id.edittext_toolbar_city_search)
     EditText editTextCitySearch;
 
+    @BindView(R.id.fab_save_city)
+    FloatingActionButton fab;
+
     @BindView(R.id.recyclerview_cities_found)
     RecyclerView recyclerView;
 
+    @BindView(R.id.viewflipper)
+    ViewFlipper viewFlipper;
+
+    @BindView(R.id.layout_retry)
+    LinearLayout errorLayout;
+
     @Inject CityAddPresenter presenter;
+
+    private TextWatcher textWatcherEditTextCitySearch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +85,6 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     private void initToolbar() {
         setHasOptionsMenu(true);
         if (toolbar != null) {
-            toolbar.setTitle(R.string.toolbar_title_add_city);
             ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
             ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
             if (actionBar != null) {
@@ -77,7 +95,7 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     }
 
     private void setupUi() {
-        editTextCitySearch.addTextChangedListener(new TextWatcher() {
+        textWatcherEditTextCitySearch = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -90,8 +108,16 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
 
             @Override
             public void afterTextChanged(Editable editable) {
+                presenter.onCitySelected(null);
                 presenter.searchCities(editable.toString());
             }
+        };
+
+        editTextCitySearch.addTextChangedListener(textWatcherEditTextCitySearch);
+
+        fab.setOnClickListener(view -> {
+            presenter.saveCity();
+            getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_OK, null);
         });
     }
 
@@ -108,7 +134,8 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            dismiss();
+            close();
+            getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, null);
             return true;
         }
 
@@ -122,32 +149,34 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
         recyclerView.setHasFixedSize(true);
         CitySearchAdapter adapter = new CitySearchAdapter(
                 cityList,
-                city -> presenter.setSelectedCity(city));
+                city -> presenter.onCitySelected(city));
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void close() {
-        dismiss();
+        getFragmentManager().popBackStack();
     }
 
     @Override
     public void showErrorNoCitySelected() {
-
+        Snackbar.make(recyclerView, "No city selected", Snackbar.LENGTH_SHORT);
     }
 
     @Override
     public void showErrorLayout() {
-
-    }
-
-    @Override
-    public void showEmptyLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, errorLayout);
     }
 
     @Override
     public void showContentLayout() {
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, recyclerView);
+    }
 
+    @Override
+    public void setSelectedCity(City city) {
+        editTextCitySearch.removeTextChangedListener(textWatcherEditTextCitySearch);
+        editTextCitySearch.setText(city.name);
+        editTextCitySearch.addTextChangedListener(textWatcherEditTextCitySearch);
     }
 }
