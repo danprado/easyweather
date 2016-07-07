@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import com.daniloprado.weather.MainApplication;
 import com.daniloprado.weather.dagger.DiComponent;
 
-public abstract class ContractFragment<T> extends Fragment {
+public abstract class ContractFragment<T> extends BaseFragment {
 
     private T mContract;
 
@@ -29,14 +29,6 @@ public abstract class ContractFragment<T> extends Fragment {
 
     protected final T getContract() {
         return mContract;
-    }
-
-    private MainApplication getMainApplication() {
-        return (MainApplication) getActivity().getApplication();
-    }
-
-    protected DiComponent getDiComponent() {
-        return getMainApplication().getDiComponent();
     }
 
 }

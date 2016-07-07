@@ -13,7 +13,7 @@ public interface CityForecastContract {
 
         void showErrorLayout();
 
-        void setupUi(ForecastDto dto);
+        void updateForecast(ForecastDto dto);
 
     }
 

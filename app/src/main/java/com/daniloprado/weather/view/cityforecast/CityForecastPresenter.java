@@ -36,7 +36,7 @@ public class CityForecastPresenter implements CityForecastContract.Presenter {
 
     @Override
     public void refreshUi() {
-        view.setupUi(forecastDto);
+        view.updateForecast(forecastDto);
         view.showContentLayout();
     }
 

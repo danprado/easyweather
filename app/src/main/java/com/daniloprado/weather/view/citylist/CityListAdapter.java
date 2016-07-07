@@ -63,7 +63,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.content_layout)
+        @BindView(R.id.card_container)
         View contentLayout;
 
         @BindView(R.id.textview_city_name)

@@ -5,10 +5,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.view.base.BaseActivity;
+import com.daniloprado.weather.view.base.BaseFragment;
 import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.view.cityforecast.CityForecastFragment;
 import com.daniloprado.weather.view.citylist.CityListFragment;
@@ -53,7 +55,7 @@ public class MainActivity extends BaseActivity
         replaceContentFragment(cityForecastFragment);
     }
 
-    private void replaceContentFragment(ContractFragment contractFragment) {
+    private void replaceContentFragment(BaseFragment contractFragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.root_content, contractFragment)
@@ -61,7 +63,7 @@ public class MainActivity extends BaseActivity
                 .commit();
     }
 
-    private void addContentFragment(ContractFragment contractFragment) {
+    private void addContentFragment(BaseFragment contractFragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.root_content, contractFragment)
@@ -109,6 +111,11 @@ public class MainActivity extends BaseActivity
     @Override
     public void onCityAddDialogDismissed() {
         initToolbar();
+
+        if(getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     @Override

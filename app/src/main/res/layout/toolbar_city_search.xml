@@ -18,7 +18,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@android:color/transparent"
         android:hint="@string/hint_city"
-        android:maxLines="1"
+        android:singleLine="true"
         android:textColor="@color/almost_white"
         android:textSize="@dimen/textSize_large" />
 </android.support.v7.widget.Toolbar>

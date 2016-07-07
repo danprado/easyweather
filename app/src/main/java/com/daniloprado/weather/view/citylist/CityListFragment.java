@@ -79,7 +79,6 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
                 new ArrayList<>(),
                 city -> getContract().onCitySelected(city));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this.getActivity()));
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 

@@ -3,7 +3,7 @@ package com.daniloprado.weather.view.cityforecast;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import com.daniloprado.weather.model.weather.Data;
 import com.daniloprado.weather.util.DateUtils;
 import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.util.WeatherUtils;
+import com.daniloprado.weather.view.base.BaseFragment;
 import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.widget.DailyWeatherView;
 
@@ -28,7 +29,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CityForecastFragment extends ContractFragment<CityForecastFragment.Contract> implements CityForecastContract.View {
+public class CityForecastFragment extends BaseFragment implements CityForecastContract.View {
 
     @BindView(R.id.textview_temperature)
     TextView textViewTemperature;
@@ -63,8 +64,8 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
 
-    @BindView(R.id.content_layout)
-    View contentLayout;
+    @BindView(R.id.swiperefreshlayout)
+    View swipeRefreshLayout;
 
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
@@ -92,6 +93,13 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
         ButterKnife.bind(this, view);
         presenter.setView(this);
         presenter.loadData(city);
+        setupUi();
+    }
+
+    private void setupUi() {
+        ((SwipeRefreshLayout)swipeRefreshLayout).setOnRefreshListener(() -> {
+            presenter.loadData(city);
+        });
     }
 
     private void loadArgs() {
@@ -108,7 +116,7 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
 
     @Override
     public void showContentLayout() {
-        ViewFlipperUtil.setDisplayedChild(viewFlipper, contentLayout);
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, swipeRefreshLayout);
     }
 
     @Override
@@ -117,7 +125,7 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
     }
 
     @Override
-    public void setupUi(ForecastDto dto) {
+    public void updateForecast(ForecastDto dto) {
         textViewTemperature.setText(String.valueOf(WeatherUtils.getFormattedTemperature(dto.currently.temperature)));
         textViewCityName.setText(city.name);
         textViewCurrentWeather.setText(dto.currently.summary);
@@ -137,12 +145,6 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
         dailyWeatherView.setDayWeatherImage(WeatherUtils.getWeatherIconResourceFromString(data.icon));
         dailyWeatherView.setMaxDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMax));
         dailyWeatherView.setMinDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMin));
-    }
-
-    public interface Contract {
-
-        void onBackPressed();
-
     }
 
 }
