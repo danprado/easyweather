@@ -3,6 +3,7 @@ package com.daniloprado.weather.view.cityforecast;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,32 +32,46 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
 
     @BindView(R.id.textview_temperature)
     TextView textViewTemperature;
+
     @BindView(R.id.textview_city_name)
     TextView textViewCityName;
+
     @BindView(R.id.textview_current_city_weather)
     TextView textViewCurrentWeather;
+
     @BindView(R.id.imageview_current_day_weather)
     ImageView imageViewCurrentWeather;
+
     @BindView(R.id.first_day)
     DailyWeatherView dailyWeatherViewDayOne;
+
     @BindView(R.id.second_day)
     DailyWeatherView dailyWeatherViewDayTwo;
+
     @BindView(R.id.third_day)
     DailyWeatherView dailyWeatherViewDayThree;
+
     @BindView(R.id.fourth_day)
     DailyWeatherView dailyWeatherViewDayFour;
+
     @BindView(R.id.fifth_day)
     DailyWeatherView dailyWeatherViewDayFive;
+
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
+
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
+
     @BindView(R.id.content_layout)
-    LinearLayout contentLayout;
+    View contentLayout;
+
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
+
     @Inject
     CityForecastContract.Presenter presenter;
+
     private City city = new City();
 
     @Override
