@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 24
@@ -13,10 +14,6 @@ android {
 
         resValue "string", "FORECAST_API_KEY", "52072863812a8a5d4343234fe68c1497"
         resValue "string", "BASE_URL", "https://api.forecast.io/"
-
-        jackOptions {
-            enabled true
-        }
     }
 
     compileOptions {
