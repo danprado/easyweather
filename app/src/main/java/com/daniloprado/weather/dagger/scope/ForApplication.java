@@ -1,4 +1,4 @@
-package com.daniloprado.weather.dagger;
+package com.daniloprado.weather.dagger.scope;
 
 import java.lang.annotation.Retention;
 

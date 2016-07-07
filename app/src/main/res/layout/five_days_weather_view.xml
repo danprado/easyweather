@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:paddingTop="@dimen/padding_normal"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/padding_normal"
-    android:paddingLeft="@dimen/padding_micro"
-    android:paddingStart="@dimen/padding_micro"
-    android:paddingRight="@dimen/padding_micro"
     android:paddingEnd="@dimen/padding_micro"
-    android:baselineAligned="false">
+    android:paddingLeft="@dimen/padding_micro"
+    android:paddingRight="@dimen/padding_micro"
+    android:paddingStart="@dimen/padding_micro"
+    android:paddingTop="@dimen/padding_normal">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -22,8 +21,7 @@
         <com.daniloprado.weather.widget.DailyWeatherView
             android:id="@+id/first_day"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -36,8 +34,7 @@
         <com.daniloprado.weather.widget.DailyWeatherView
             android:id="@+id/second_day"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -50,8 +47,7 @@
         <com.daniloprado.weather.widget.DailyWeatherView
             android:id="@+id/third_day"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -64,8 +60,7 @@
         <com.daniloprado.weather.widget.DailyWeatherView
             android:id="@+id/fourth_day"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -78,8 +73,7 @@
         <com.daniloprado.weather.widget.DailyWeatherView
             android:id="@+id/fifth_day"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

@@ -24,10 +24,6 @@ public class MainApplication extends Application {
         initCalligraphy();
     }
 
-    protected ApplicationModule getApplicationModule() {
-        return new ApplicationModule(this);
-    }
-
     private void initDagger() {
         diComponent = DaggerDiComponent.builder()
                 .applicationModule(new ApplicationModule(this))

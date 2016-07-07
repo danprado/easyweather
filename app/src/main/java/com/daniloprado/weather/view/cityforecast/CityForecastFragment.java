@@ -125,7 +125,9 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
     }
 
     public interface Contract {
+
         void onBackPressed();
+
     }
 
 }
