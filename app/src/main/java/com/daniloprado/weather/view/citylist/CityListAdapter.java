@@ -49,7 +49,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         City city = cityList.get(position);
         holder.cityName.setText(city.name);
-        holder.cardContainer.setOnClickListener(l -> cityClickListener.onCityClick(city));
+        holder.contentLayout.setOnClickListener(l -> cityClickListener.onCityClick(city));
     }
 
     @Override
@@ -63,8 +63,8 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card_container)
-        View cardContainer;
+        @BindView(R.id.content_layout)
+        View contentLayout;
 
         @BindView(R.id.textview_city_name)
         TextView cityName;

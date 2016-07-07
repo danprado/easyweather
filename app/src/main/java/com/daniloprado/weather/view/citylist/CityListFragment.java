@@ -22,6 +22,7 @@ import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
+import com.daniloprado.weather.widget.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,7 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
                 new ArrayList<>(),
                 city -> getContract().onCitySelected(city));
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this.getActivity()));
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
