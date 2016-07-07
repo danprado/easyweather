@@ -6,7 +6,8 @@ import android.widget.ViewFlipper;
 
 public final class ViewFlipperUtil {
 
-    private ViewFlipperUtil() {}
+    private ViewFlipperUtil() {
+    }
 
     public static boolean isValidChildIndex(@NonNull ViewFlipper flipper, int index) {
         return index < flipper.getChildCount()

@@ -30,8 +30,12 @@ public class CityAddPresenter implements CityAddContract.Presenter {
 
     @Override
     public void onCitySelected(City city) {
-        DatabaseManager.getInstance().addCity(city);
-        view.close(Activity.RESULT_OK);
+        if (DatabaseManager.getInstance().checkCityExists(city.name)) {
+            view.showErrorCityAlreadyExists();
+        } else {
+            DatabaseManager.getInstance().addCity(city);
+            view.close(Activity.RESULT_OK);
+        }
     }
 
     @Override

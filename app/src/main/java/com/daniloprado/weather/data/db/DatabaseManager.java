@@ -11,21 +11,20 @@ import java.util.List;
 public class DatabaseManager {
 
     static private DatabaseManager instance;
+    private DatabaseHelper helper;
+
+    private DatabaseManager(Context context) {
+        helper = new DatabaseHelper(context);
+    }
 
     static public void init(Context context) {
-        if (null==instance) {
+        if (null == instance) {
             instance = new DatabaseManager(context);
         }
     }
 
     static public DatabaseManager getInstance() {
         return instance;
-    }
-
-    private DatabaseHelper helper;
-
-    private DatabaseManager(Context context) {
-        helper = new DatabaseHelper(context);
     }
 
     private DatabaseHelper getHelper() {
@@ -57,5 +56,18 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
-    
+
+    public boolean checkCityExists(String name) {
+        try {
+            if (getHelper().getCityDao().queryForEq("name", name).size() > 0) {
+               return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return false;
+    }
+
 }

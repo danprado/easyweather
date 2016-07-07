@@ -1,21 +1,15 @@
 package com.daniloprado.weather.view.main;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.view.base.BaseActivity;
 import com.daniloprado.weather.view.base.ContractFragment;
-import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
 import com.daniloprado.weather.view.cityforecast.CityForecastFragment;
 import com.daniloprado.weather.view.citylist.CityListFragment;
 
@@ -122,7 +116,7 @@ public class MainActivity extends BaseActivity
         shouldDisplayHomeUp();
     }
 
-    public void shouldDisplayHomeUp(){
+    public void shouldDisplayHomeUp() {
         boolean enableHomeUp = getSupportFragmentManager().getBackStackEntryCount() > 0;
         ActionBar bar = getSupportActionBar();
         if (bar != null) {

@@ -9,8 +9,11 @@ public interface CityListContract {
     interface View {
 
         void showLoadingLayout();
+
         void showContentLayout();
+
         void showErrorLayout();
+
         void updateData(List<City> cityList);
 
     }
@@ -18,8 +21,11 @@ public interface CityListContract {
     interface Presenter {
 
         void setView(View view);
+
         void loadData();
+
         void refreshUi();
+
         void deleteCity(City city);
 
     }

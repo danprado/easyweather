@@ -29,51 +29,34 @@ import butterknife.ButterKnife;
 
 public class CityForecastFragment extends ContractFragment<CityForecastFragment.Contract> implements CityForecastContract.View {
 
-    public interface Contract {
-        void onBackPressed();
-    }
-
     @BindView(R.id.textview_temperature)
     TextView textViewTemperature;
-
     @BindView(R.id.textview_city_name)
     TextView textViewCityName;
-
     @BindView(R.id.textview_current_city_weather)
     TextView textViewCurrentWeather;
-
     @BindView(R.id.imageview_current_day_weather)
     ImageView imageViewCurrentWeather;
-
     @BindView(R.id.first_day)
     DailyWeatherView dailyWeatherViewDayOne;
-
     @BindView(R.id.second_day)
     DailyWeatherView dailyWeatherViewDayTwo;
-
     @BindView(R.id.third_day)
     DailyWeatherView dailyWeatherViewDayThree;
-
     @BindView(R.id.fourth_day)
     DailyWeatherView dailyWeatherViewDayFour;
-
     @BindView(R.id.fifth_day)
     DailyWeatherView dailyWeatherViewDayFive;
-
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
-
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
-
     @BindView(R.id.content_layout)
     LinearLayout contentLayout;
-
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
-
-    @Inject CityForecastContract.Presenter presenter;
-
+    @Inject
+    CityForecastContract.Presenter presenter;
     private City city = new City();
 
     @Override
@@ -139,6 +122,10 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
         dailyWeatherView.setDayWeatherImage(WeatherUtils.getWeatherIconResourceFromString(data.icon));
         dailyWeatherView.setMaxDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMax));
         dailyWeatherView.setMinDayTemp(WeatherUtils.getFormattedTemperature(data.temperatureMin));
+    }
+
+    public interface Contract {
+        void onBackPressed();
     }
 
 }

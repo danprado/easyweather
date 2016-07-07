@@ -14,7 +14,7 @@ public abstract class ContractFragment<T> extends Fragment {
     @Override
     public void onAttach(Context context) {
         try {
-            mContract = (T)context;
+            mContract = (T) context;
         } catch (ClassCastException e) {
             throw new IllegalStateException(context.getClass().getSimpleName()
                     + " does not implement " + getClass().getSimpleName() + "'s contract interface.", e);

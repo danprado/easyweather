@@ -9,6 +9,7 @@ import rx.Observable;
 public interface CityRepository {
 
     Observable<List<City>> getCities();
+
     Observable<List<City>> searchCities(String query);
 
 }

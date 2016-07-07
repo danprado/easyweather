@@ -4,7 +4,8 @@ import android.location.Address;
 
 public final class PlaceUtils {
 
-    private PlaceUtils() {}
+    private PlaceUtils() {
+    }
 
     public static String getCityDescription(Address address) {
         String description = address.getLocality();
@@ -15,7 +16,7 @@ public final class PlaceUtils {
         if (address.getCountryName() != null) {
             description += ", " + address.getCountryName();
         }
-        return  description;
+        return description;
     }
 
 }

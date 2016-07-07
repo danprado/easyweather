@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.daniloprado.weather.MainApplication;
-import com.daniloprado.weather.dagger.ForApplication;
 
-import javax.inject.Qualifier;
 import javax.inject.Singleton;
 
 import dagger.Module;

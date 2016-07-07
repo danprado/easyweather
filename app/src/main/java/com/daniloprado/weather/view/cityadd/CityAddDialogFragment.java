@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -41,6 +42,9 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.main_layout)
+    LinearLayout mainLayout;
+
     @BindView(R.id.edittext_toolbar_city_search)
     EditText editTextCitySearch;
 
@@ -56,7 +60,8 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
 
-    @Inject CityAddPresenter presenter;
+    @Inject
+    CityAddPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,8 +87,8 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     private void initToolbar() {
         setHasOptionsMenu(true);
         if (toolbar != null) {
-            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-            ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 actionBar.setHomeButtonEnabled(true);
@@ -139,6 +144,11 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
                 cityList,
                 city -> presenter.onCitySelected(city));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void showErrorCityAlreadyExists() {
+        Snackbar.make(mainLayout, R.string.error_message_city_has_already_been_added, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

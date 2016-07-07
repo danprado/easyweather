@@ -4,7 +4,8 @@ import com.daniloprado.weather.R;
 
 public final class WeatherUtils {
 
-    private WeatherUtils() {}
+    private WeatherUtils() {
+    }
 
     public static String getFormattedTemperature(Double temp) {
         return String.valueOf(temp.intValue()) + "º";

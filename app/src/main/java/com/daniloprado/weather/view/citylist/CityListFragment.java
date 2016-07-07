@@ -33,27 +33,18 @@ import butterknife.ButterKnife;
 
 public class CityListFragment extends ContractFragment<CityListFragment.Contract> implements CityListContract.View {
 
-    public interface Contract {
-        void onCitySelected(City city);
-        void onCityAddDialogDismissed();
-    }
-
     @BindView(R.id.fab)
     FloatingActionButton fab;
-
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
-
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
-
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
-
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
-
-    @Inject CityListContract.Presenter presenter;
+    @Inject
+    CityListContract.Presenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,8 +83,8 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                presenter.deleteCity(((CityListAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition()));
-                ((CityListAdapter)recyclerView.getAdapter()).delete(viewHolder.getAdapterPosition());
+                presenter.deleteCity(((CityListAdapter) recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition()));
+                ((CityListAdapter) recyclerView.getAdapter()).delete(viewHolder.getAdapterPosition());
             }
         };
 
@@ -142,7 +133,13 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
 
     @Override
     public void updateData(List<City> cityList) {
-        ((CityListAdapter)recyclerView.getAdapter()).replaceDataSet(cityList);
+        ((CityListAdapter) recyclerView.getAdapter()).replaceDataSet(cityList);
+    }
+
+    public interface Contract {
+        void onCitySelected(City city);
+
+        void onCityAddDialogDismissed();
     }
 
 }

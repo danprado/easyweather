@@ -8,8 +8,11 @@ public interface CityForecastContract {
     interface View {
 
         void showLoadingLayout();
+
         void showContentLayout();
+
         void showErrorLayout();
+
         void setupUi(ForecastDto dto);
 
     }
@@ -17,7 +20,9 @@ public interface CityForecastContract {
     interface Presenter {
 
         void setView(CityForecastContract.View view);
+
         void loadData(City city);
+
         void refreshUi();
 
     }

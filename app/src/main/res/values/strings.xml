@@ -6,4 +6,5 @@
     <string name="toolbar_title_add_city">Add city</string>
     <string name="label_could_not_load_data">Could not load data</string>
     <string name="label_tap_to_retry">Tap to retry</string>
+    <string name="error_message_city_has_already_been_added">This city has already been added</string>
 </resources>

@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 
 public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHolder> {
 
-    private List<City> cityList;
     private final CityClickListener cityClickListener;
+    private List<City> cityList;
 
     CityListAdapter(List<City> cityList, CityClickListener cityClickListener) {
         this.cityList = cityList;
@@ -63,8 +63,10 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card_container) View cardContainer;
-        @BindView(R.id.textview_city_name) TextView cityName;
+        @BindView(R.id.card_container)
+        View cardContainer;
+        @BindView(R.id.textview_city_name)
+        TextView cityName;
 
         public ViewHolder(View v) {
             super(v);
