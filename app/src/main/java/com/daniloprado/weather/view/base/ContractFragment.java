@@ -1,10 +1,6 @@
 package com.daniloprado.weather.view.base;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-
-import com.daniloprado.weather.MainApplication;
-import com.daniloprado.weather.dagger.DiComponent;
 
 public abstract class ContractFragment<T> extends BaseFragment {
 

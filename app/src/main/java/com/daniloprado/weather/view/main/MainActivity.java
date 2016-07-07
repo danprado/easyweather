@@ -11,7 +11,6 @@ import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.view.base.BaseActivity;
 import com.daniloprado.weather.view.base.BaseFragment;
-import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.view.cityforecast.CityForecastFragment;
 import com.daniloprado.weather.view.citylist.CityListFragment;
 
@@ -112,7 +111,7 @@ public class MainActivity extends BaseActivity
     public void onCityAddDialogDismissed() {
         initToolbar();
 
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }

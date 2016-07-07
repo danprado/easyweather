@@ -60,7 +60,7 @@ public class DatabaseManager {
     public boolean checkCityExists(String name) {
         try {
             if (getHelper().getCityDao().queryForEq("name", name).size() > 0) {
-               return true;
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();

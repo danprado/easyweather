@@ -22,7 +22,6 @@ import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
-import com.daniloprado.weather.widget.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
