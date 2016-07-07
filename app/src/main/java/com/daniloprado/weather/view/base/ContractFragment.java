@@ -1,6 +1,5 @@
 package com.daniloprado.weather.view.base;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
@@ -28,16 +27,12 @@ public abstract class ContractFragment<T> extends Fragment {
         mContract = null;
     }
 
-    public final T getContract() {
+    protected final T getContract() {
         return mContract;
     }
 
-    protected MainApplication getMainApplication() {
-        Application application = getActivity().getApplication();
-        if (application instanceof MainApplication) {
-            return (MainApplication) application;
-        }
-        return null;
+    private MainApplication getMainApplication() {
+        return (MainApplication) getActivity().getApplication();
     }
 
     protected DiComponent getDiComponent() {

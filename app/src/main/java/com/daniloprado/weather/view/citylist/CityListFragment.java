@@ -35,14 +35,19 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
+
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
+
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
+
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
+
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
+
     @Inject
     CityListContract.Presenter presenter;
 
@@ -137,9 +142,11 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
     }
 
     public interface Contract {
+
         void onCitySelected(City city);
 
         void onCityAddDialogDismissed();
+
     }
 
 }
