@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">weather</string>
+    <string name="app_name">Easy Weather</string>
     <string name="action_settings">Settings</string>
     <string name="hint_city">City</string>
     <string name="menu_item_title_save">Save</string>
