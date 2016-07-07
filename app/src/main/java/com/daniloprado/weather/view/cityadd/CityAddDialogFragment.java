@@ -19,6 +19,7 @@ import android.view.Window;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ViewFlipper;
 
 import com.daniloprado.weather.R;
@@ -46,11 +47,14 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @BindView(R.id.recyclerview_cities_found)
     RecyclerView recyclerView;
 
-    @BindView(R.id.viewflipper)
-    ViewFlipper viewFlipper;
-
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
+
+    @BindView(R.id.progressbar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.viewflipper)
+    ViewFlipper viewFlipper;
 
     @Inject CityAddPresenter presenter;
 
@@ -141,6 +145,11 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     public void close(int result) {
         getFragmentManager().popBackStack();
         getTargetFragment().onActivityResult(REQUEST_CODE, result, null);
+    }
+
+    @Override
+    public void showLoadingLayout() {
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, progressBar);
     }
 
     @Override

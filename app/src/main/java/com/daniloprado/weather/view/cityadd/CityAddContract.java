@@ -9,6 +9,7 @@ public interface CityAddContract {
     interface View {
 
         void close(int result);
+        void showLoadingLayout();
         void showErrorLayout();
         void showContentLayout();
         void setupRecyclerViewAdapter(List<City> cityList);

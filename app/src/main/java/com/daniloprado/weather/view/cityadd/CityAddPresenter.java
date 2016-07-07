@@ -36,6 +36,7 @@ public class CityAddPresenter implements CityAddContract.Presenter {
 
     @Override
     public void searchCities(String query) {
+        view.showLoadingLayout();
         cityRepository.searchCities(query).subscribe(cities -> {
             cityList = cities;
             refreshUi();

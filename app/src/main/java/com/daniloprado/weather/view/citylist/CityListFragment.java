@@ -92,8 +92,8 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                ((CityListAdapter)recyclerView.getAdapter()).delete(viewHolder.getAdapterPosition());
                 presenter.deleteCity(((CityListAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition()));
+                ((CityListAdapter)recyclerView.getAdapter()).delete(viewHolder.getAdapterPosition());
             }
         };
 
