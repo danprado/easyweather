@@ -13,12 +13,17 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ViewFlipper;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.model.City;
+import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,6 +43,15 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
+
+    @BindView(R.id.error_layout)
+    LinearLayout errorLayout;
+
+    @BindView(R.id.progressbar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.viewflipper)
+    ViewFlipper viewFlipper;
 
     @Inject CityListContract.Presenter presenter;
 
@@ -60,15 +74,31 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
         setupUi();
     }
 
-    @Override
-    public void setupRecyclerViewAdapter(List<City> cityList) {
+    public void setupRecyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         CityListAdapter adapter = new CityListAdapter(
-                cityList,
+                new ArrayList<>(),
                 city -> getContract().onCitySelected(city));
         recyclerView.setAdapter(adapter);
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                ((CityListAdapter)recyclerView.getAdapter()).delete(viewHolder.getAdapterPosition());
+                presenter.deleteCity(((CityListAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition()));
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private void setupUi() {
@@ -81,18 +111,7 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
             transaction.add(android.R.id.content, cityAddFragment).addToBackStack(null).commit();
         });
 
-//        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-//
-//            @Override
-//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-//
-//            }
-//        };
+        setupRecyclerView();
     }
 
     @Override
@@ -108,22 +127,22 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
 
     @Override
     public void showLoadingLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, progressBar);
     }
 
     @Override
     public void showContentLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, recyclerView);
     }
 
     @Override
     public void showErrorLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, errorLayout);
     }
 
     @Override
-    public void showEmptyLayout() {
-
+    public void updateData(List<City> cityList) {
+        ((CityListAdapter)recyclerView.getAdapter()).replaceDataSet(cityList);
     }
 
 }

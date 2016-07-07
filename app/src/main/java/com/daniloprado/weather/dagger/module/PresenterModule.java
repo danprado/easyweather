@@ -18,8 +18,8 @@ import dagger.Provides;
 public class PresenterModule {
 
     @Provides
-    CityListContract.Presenter provideCityListPresenter(CityRepository cityRepository) {
-        return new CityListPresenter(cityRepository);
+    CityListContract.Presenter provideCityListPresenter(CityRepository cityRepository, Context context) {
+        return new CityListPresenter(cityRepository, context);
     }
 
     @Provides

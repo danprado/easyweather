@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,21 +43,16 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @BindView(R.id.edittext_toolbar_city_search)
     EditText editTextCitySearch;
 
-    @BindView(R.id.fab_save_city)
-    FloatingActionButton fab;
-
     @BindView(R.id.recyclerview_cities_found)
     RecyclerView recyclerView;
 
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
 
-    @BindView(R.id.layout_retry)
+    @BindView(R.id.error_layout)
     LinearLayout errorLayout;
 
     @Inject CityAddPresenter presenter;
-
-    private TextWatcher textWatcherEditTextCitySearch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +88,7 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     }
 
     private void setupUi() {
-        textWatcherEditTextCitySearch = new TextWatcher() {
+        editTextCitySearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -108,16 +101,8 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
 
             @Override
             public void afterTextChanged(Editable editable) {
-                presenter.onCitySelected(null);
                 presenter.searchCities(editable.toString());
             }
-        };
-
-        editTextCitySearch.addTextChangedListener(textWatcherEditTextCitySearch);
-
-        fab.setOnClickListener(view -> {
-            presenter.saveCity();
-            getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_OK, null);
         });
     }
 
@@ -134,8 +119,7 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            close();
-            getTargetFragment().onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, null);
+            close(Activity.RESULT_CANCELED);
             return true;
         }
 
@@ -154,13 +138,9 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     }
 
     @Override
-    public void close() {
+    public void close(int result) {
         getFragmentManager().popBackStack();
-    }
-
-    @Override
-    public void showErrorNoCitySelected() {
-        Snackbar.make(recyclerView, "No city selected", Snackbar.LENGTH_SHORT);
+        getTargetFragment().onActivityResult(REQUEST_CODE, result, null);
     }
 
     @Override
@@ -173,10 +153,4 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
         ViewFlipperUtil.setDisplayedChild(viewFlipper, recyclerView);
     }
 
-    @Override
-    public void setSelectedCity(City city) {
-        editTextCitySearch.removeTextChangedListener(textWatcherEditTextCitySearch);
-        editTextCitySearch.setText(city.name);
-        editTextCitySearch.addTextChangedListener(textWatcherEditTextCitySearch);
-    }
 }

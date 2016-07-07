@@ -8,11 +8,9 @@ public interface CityAddContract {
 
     interface View {
 
-        void close();
-        void showErrorNoCitySelected();
+        void close(int result);
         void showErrorLayout();
         void showContentLayout();
-        void setSelectedCity(City city);
         void setupRecyclerViewAdapter(List<City> cityList);
 
     }
@@ -23,7 +21,6 @@ public interface CityAddContract {
         void onCitySelected(City city);
         void searchCities(String query);
         void refreshUi();
-        void saveCity();
 
     }
 

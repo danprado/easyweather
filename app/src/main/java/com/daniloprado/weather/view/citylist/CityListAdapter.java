@@ -16,12 +16,26 @@ import butterknife.ButterKnife;
 
 public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHolder> {
 
-    private final List<City> cityList;
+    private List<City> cityList;
     private final CityClickListener cityClickListener;
 
     CityListAdapter(List<City> cityList, CityClickListener cityClickListener) {
         this.cityList = cityList;
         this.cityClickListener = cityClickListener;
+    }
+
+    public void replaceDataSet(List<City> cityList) {
+        this.cityList = cityList;
+        notifyDataSetChanged();
+    }
+
+    public void delete(int position) {
+        cityList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public City getItem(int position) {
+        return cityList.get(position);
     }
 
     @Override

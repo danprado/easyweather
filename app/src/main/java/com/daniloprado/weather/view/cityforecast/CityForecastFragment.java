@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.daniloprado.weather.R;
 import com.daniloprado.weather.data.dto.ForecastDto;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.model.weather.Data;
 import com.daniloprado.weather.util.DateUtils;
+import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.util.WeatherUtils;
 import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.widget.DailyWeatherView;
@@ -56,6 +60,18 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
     @BindView(R.id.fifth_day)
     DailyWeatherView dailyWeatherViewDayFive;
 
+    @BindView(R.id.error_layout)
+    LinearLayout errorLayout;
+
+    @BindView(R.id.progressbar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.content_layout)
+    LinearLayout contentLayout;
+
+    @BindView(R.id.viewflipper)
+    ViewFlipper viewFlipper;
+
     @Inject CityForecastContract.Presenter presenter;
 
     private City city = new City();
@@ -89,17 +105,17 @@ public class CityForecastFragment extends ContractFragment<CityForecastFragment.
 
     @Override
     public void showLoadingLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, progressBar);
     }
 
     @Override
     public void showContentLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, contentLayout);
     }
 
     @Override
     public void showErrorLayout() {
-
+        ViewFlipperUtil.setDisplayedChild(viewFlipper, errorLayout);
     }
 
     @Override

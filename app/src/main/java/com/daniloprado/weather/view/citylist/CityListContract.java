@@ -11,8 +11,7 @@ public interface CityListContract {
         void showLoadingLayout();
         void showContentLayout();
         void showErrorLayout();
-        void showEmptyLayout();
-        void setupRecyclerViewAdapter(List<City> cityList);
+        void updateData(List<City> cityList);
 
     }
 
@@ -21,6 +20,7 @@ public interface CityListContract {
         void setView(View view);
         void loadData();
         void refreshUi();
+        void deleteCity(City city);
 
     }
 

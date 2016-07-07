@@ -1,5 +1,6 @@
 package com.daniloprado.weather.view.cityadd;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.daniloprado.weather.data.db.DatabaseManager;
@@ -14,7 +15,6 @@ public class CityAddPresenter implements CityAddContract.Presenter {
 
     private CityAddContract.View view;
     private CityRepository cityRepository;
-    private City selectedCity;
     private List<City> cityList;
 
     @Inject
@@ -30,11 +30,8 @@ public class CityAddPresenter implements CityAddContract.Presenter {
 
     @Override
     public void onCitySelected(City city) {
-        this.selectedCity = city;
-
-        if (selectedCity != null) {
-            view.setSelectedCity(city);
-        }
+        DatabaseManager.getInstance().addCity(city);
+        view.close(Activity.RESULT_OK);
     }
 
     @Override
@@ -54,13 +51,4 @@ public class CityAddPresenter implements CityAddContract.Presenter {
         view.showContentLayout();
     }
 
-    @Override
-    public void saveCity() {
-        if (selectedCity != null) {
-            DatabaseManager.getInstance().addCity(selectedCity);
-            view.close();
-        } else {
-            view.showErrorNoCitySelected();
-        }
-    }
 }
