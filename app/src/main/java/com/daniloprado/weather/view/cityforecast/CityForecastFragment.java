@@ -21,7 +21,6 @@ import com.daniloprado.weather.util.DateUtils;
 import com.daniloprado.weather.util.ViewFlipperUtil;
 import com.daniloprado.weather.util.WeatherUtils;
 import com.daniloprado.weather.view.base.BaseFragment;
-import com.daniloprado.weather.view.base.ContractFragment;
 import com.daniloprado.weather.widget.DailyWeatherView;
 
 import javax.inject.Inject;
@@ -65,7 +64,7 @@ public class CityForecastFragment extends BaseFragment implements CityForecastCo
     ProgressBar progressBar;
 
     @BindView(R.id.swiperefreshlayout)
-    View swipeRefreshLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.viewflipper)
     ViewFlipper viewFlipper;
@@ -92,14 +91,13 @@ public class CityForecastFragment extends BaseFragment implements CityForecastCo
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         presenter.setView(this);
-        presenter.loadData(city);
+        presenter.loadDataWithProgress(city);
         setupUi();
     }
 
     private void setupUi() {
-        ((SwipeRefreshLayout)swipeRefreshLayout).setOnRefreshListener(() -> {
-            presenter.loadData(city);
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> presenter.loadData(city));
+        swipeRefreshLayout.setColorSchemeColors(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
     }
 
     private void loadArgs() {
@@ -116,6 +114,7 @@ public class CityForecastFragment extends BaseFragment implements CityForecastCo
 
     @Override
     public void showContentLayout() {
+        swipeRefreshLayout.setRefreshing(false);
         ViewFlipperUtil.setDisplayedChild(viewFlipper, swipeRefreshLayout);
     }
 

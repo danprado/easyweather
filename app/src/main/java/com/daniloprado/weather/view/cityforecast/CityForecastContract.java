@@ -23,6 +23,8 @@ public interface CityForecastContract {
 
         void loadData(City city);
 
+        void loadDataWithProgress(City city);
+
         void refreshUi();
 
     }
