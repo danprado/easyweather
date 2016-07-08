@@ -7,7 +7,7 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import java.sql.SQLException;
 
-public class CityDaoImpl extends BaseDaoImpl<City, Integer> implements CityDao{
+public class CityDaoImpl extends BaseDaoImpl<City, Integer> implements CityDao {
 
     public CityDaoImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, City.class);

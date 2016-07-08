@@ -4,8 +4,11 @@ import com.daniloprado.weather.data.db.dao.CityDao;
 import com.daniloprado.weather.data.db.dao.impl.CityDaoImpl;
 import com.daniloprado.weather.data.db.helper.DatabaseHelper;
 import com.daniloprado.weather.model.City;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -32,10 +35,11 @@ public class DbModule {
         return databaseHelper.getConnectionSource();
     }
 
-//    @Provides
-//    @Singleton
-//    CityDao provideCityDao() {
-//        return databaseHelper.getRuntimeExceptionDao(City.class);
-//    }
+    @Provides
+    @Singleton
+    @Named("CityDao")
+    RuntimeExceptionDao<City, Integer> provideCityDao() {
+        return databaseHelper.getRuntimeExceptionDao(City.class);
+    }
 
 }

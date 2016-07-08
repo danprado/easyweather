@@ -8,6 +8,8 @@ import com.daniloprado.weather.data.db.helper.DatabaseHelper;
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.util.PlaceUtils;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -24,43 +27,28 @@ public class CityRepositoryImpl implements CityRepository {
 
     private Context context;
     private DatabaseHelper databaseHelper;
+    private RuntimeExceptionDao<City, Integer> cityDao;
 
     @Inject
-    public CityRepositoryImpl(Context context, DatabaseHelper databaseHelper) {
+    public CityRepositoryImpl(Context context, DatabaseHelper databaseHelper, @Named("CityDao") RuntimeExceptionDao<City, Integer> cityDao) {
         this.context = context;
         this.databaseHelper = databaseHelper;
+        this.cityDao = cityDao;
     }
 
     @Override
     public void saveCity(City city) {
-        try {
-            databaseHelper.getCityDao().create(city);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        cityDao.create(city);
     }
 
     @Override
     public void deleteCity(City city) {
-        try {
-            databaseHelper.getCityDao().delete(city);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        cityDao.delete(city);
     }
 
     @Override
     public boolean checkCityExists(String name) {
-        try {
-            if (databaseHelper.getCityDao().queryForEq("name", name).size() > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return false;
+        return cityDao.queryForEq("name", name).size() > 0;
     }
 
     @Override
@@ -68,7 +56,7 @@ public class CityRepositoryImpl implements CityRepository {
         Observable.OnSubscribe<List<City>> onSubscribe = subscriber -> {
             try {
                 if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(databaseHelper.getCityDao().queryForAll());
+                    subscriber.onNext(cityDao.queryForAll());
                     subscriber.onCompleted();
                 }
             } catch (Exception e) {
