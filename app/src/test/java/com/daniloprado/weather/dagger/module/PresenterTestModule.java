@@ -11,8 +11,12 @@ import com.daniloprado.weather.view.citylist.CityListPresenter;
 
 import org.mockito.Mockito;
 
+import dagger.Module;
+
+@Module
 public class PresenterTestModule extends PresenterModule {
 
+    /*
     @Override
     public CityListContract.Presenter provideCityListPresenter(CityRepository cityRepository) {
         return Mockito.mock(CityListPresenter.class);
@@ -27,5 +31,6 @@ public class PresenterTestModule extends PresenterModule {
     public CityAddContract.Presenter provideCityAddPresenter(CityRepository cityRepository) {
         return Mockito.mock(CityAddPresenter.class);
     }
+    */
 
 }

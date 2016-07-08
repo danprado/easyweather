@@ -27,7 +27,9 @@ public class CityAddPresenter implements CityAddContract.Presenter {
 
     @Override
     public void onCitySelected(City city) {
-        if (cityRepository.checkCityExists(city.name)) {
+        if (city != null
+                && !city.name.equals("")
+                && cityRepository.checkCityExists(city.name)) {
             view.showErrorCityAlreadyExists();
         } else {
             cityRepository.saveCity(city);

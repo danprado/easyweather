@@ -47,8 +47,14 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
     compile 'com.google.code.gson:gson:2.4'
+
+    /**
+     * Dagger Dependencies.
+     */
     compile 'com.google.dagger:dagger:2.2'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.2'
+    testCompile 'com.google.dagger:dagger-compiler:2.2'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.2'
     provided 'javax.annotation:jsr250-api:1.0'
 
     /**
