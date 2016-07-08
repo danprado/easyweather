@@ -19,7 +19,7 @@ public class PresenterModule {
 
     @Provides
     CityListContract.Presenter provideCityListPresenter(CityRepository cityRepository, Context context) {
-        return new CityListPresenter(cityRepository, context);
+        return new CityListPresenter(cityRepository);
     }
 
     @Provides
@@ -29,7 +29,7 @@ public class PresenterModule {
 
     @Provides
     CityAddContract.Presenter provideCityAddPresenter(CityRepository cityRepository, Context context) {
-        return new CityAddPresenter(cityRepository, context);
+        return new CityAddPresenter(cityRepository);
     }
 
 }

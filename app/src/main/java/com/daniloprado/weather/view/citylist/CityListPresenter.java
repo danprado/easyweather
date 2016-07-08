@@ -1,8 +1,5 @@
 package com.daniloprado.weather.view.citylist;
 
-import android.content.Context;
-
-import com.daniloprado.weather.data.db.DatabaseManager;
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.model.City;
 
@@ -17,9 +14,8 @@ public class CityListPresenter implements CityListContract.Presenter {
     private List<City> cityList;
 
     @Inject
-    public CityListPresenter(CityRepository cityRepository, Context context) {
+    public CityListPresenter(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
-        DatabaseManager.init(context);
     }
 
     @Override
@@ -48,6 +44,7 @@ public class CityListPresenter implements CityListContract.Presenter {
 
     @Override
     public void deleteCity(City city) {
-        DatabaseManager.getInstance().deleteCity(city);
+        cityRepository.deleteCity(city);
     }
+
 }

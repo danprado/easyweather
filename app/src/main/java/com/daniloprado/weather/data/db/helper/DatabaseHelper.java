@@ -7,10 +7,13 @@ import android.util.Log;
 import com.daniloprado.weather.model.City;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+
+import javax.inject.Inject;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
@@ -19,6 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<City, Integer> cityDao = null;
 
+    @Inject
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -29,7 +33,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, City.class);
             initDefaultData();
         } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Unable to create datbases", e);
+            Log.e(DatabaseHelper.class.getName(), "Unable to create database", e);
         }
     }
 
@@ -82,7 +86,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         if (cityDao == null) {
             cityDao = getDao(City.class);
         }
-
         return cityDao;
     }
 

@@ -9,13 +9,7 @@ public final class ViewFlipperUtil {
     private ViewFlipperUtil() {
     }
 
-    public static boolean isValidChildIndex(@NonNull ViewFlipper flipper, int index) {
-        return index < flipper.getChildCount()
-                && index >= 0;
-    }
-
-    public static boolean isValidChild(@NonNull ViewFlipper flipper, View child) {
-        int index = flipper.indexOfChild(child);
+    private static boolean isValidChildIndex(@NonNull ViewFlipper flipper, int index) {
         return index < flipper.getChildCount()
                 && index >= 0;
     }

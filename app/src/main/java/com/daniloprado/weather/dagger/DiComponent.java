@@ -1,6 +1,7 @@
 package com.daniloprado.weather.dagger;
 
 import com.daniloprado.weather.dagger.module.ApplicationModule;
+import com.daniloprado.weather.dagger.module.DbModule;
 import com.daniloprado.weather.dagger.module.NetworkModule;
 import com.daniloprado.weather.dagger.module.PresenterModule;
 import com.daniloprado.weather.dagger.module.RepositoryModule;
@@ -20,7 +21,8 @@ import dagger.Component;
         NetworkModule.class,
         ServiceModule.class,
         PresenterModule.class,
-        RepositoryModule.class
+        RepositoryModule.class,
+        DbModule.class
 })
 public interface DiComponent {
 

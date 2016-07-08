@@ -5,7 +5,9 @@ import android.app.Application;
 import com.daniloprado.weather.dagger.DaggerDiComponent;
 import com.daniloprado.weather.dagger.DiComponent;
 import com.daniloprado.weather.dagger.module.ApplicationModule;
+import com.daniloprado.weather.dagger.module.DbModule;
 import com.daniloprado.weather.dagger.module.NetworkModule;
+import com.daniloprado.weather.data.db.helper.DatabaseHelper;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -28,6 +30,7 @@ public class MainApplication extends Application {
         diComponent = DaggerDiComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .networkModule(new NetworkModule(getString(R.string.BASE_URL)))
+                .dbModule(new DbModule(new DatabaseHelper(this)))
                 .build();
     }
 
