@@ -51,6 +51,19 @@ public class CityListPresenterTest {
     private City addedCity;
 
     @Test
+    public void shouldNotAddDuplicateCity() {
+        City city = new City();
+        city.name = "Dublin";
+        when(cityRepository.checkCityExists("Dublin")).thenReturn(true);
+        doAnswer(invocation -> {
+            addedCity = (City) invocation.getArguments()[0];
+            return addedCity;
+        }).when(cityRepository).saveCity(city);
+        cityAddPresenter.onCitySelected(city);
+        Assert.assertNull(addedCity);
+    }
+
+    @Test
     public void shouldAddTheCity() {
         City city = new City();
         city.name = "Dublin";
@@ -62,5 +75,5 @@ public class CityListPresenterTest {
         cityAddPresenter.onCitySelected(city);
         Assert.assertEquals(city, addedCity);
     }
-    
+
 }
