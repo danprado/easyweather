@@ -7,13 +7,14 @@ import android.util.Log;
 import com.daniloprado.weather.model.City;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
@@ -21,17 +22,19 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private Dao<City, Integer> cityDao = null;
+    private List<City> cities;
 
     @Inject
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context, @Named("DefaultCities") List<City> cities) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.cities = cities;
     }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, City.class);
-            initDefaultData();
+            initCities(getCityDao(), cities);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Unable to create database", e);
         }
@@ -47,42 +50,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    private void initDefaultData() {
-        City dublin = new City();
-        dublin.name = "Dublin";
-        dublin.fullDescription = "Dublin, Ireland";
-        dublin.latitude = 53.350140;
-        dublin.longitude = -6.266155;
 
-        City london = new City();
-        london.name = "London";
-        london.fullDescription = "London, UK";
-        london.latitude = 51.508530;
-        london.longitude = -0.076132;
-
-        City newYork = new City();
-        newYork.name = "New York";
-        newYork.fullDescription = "New York, US";
-        newYork.latitude = 40.730610;
-        newYork.longitude = -73.935242;
-
-        City barcelona = new City();
-        barcelona.name = "Barcelona";
-        barcelona.fullDescription = "Barcelona, Spain";
-        barcelona.latitude = 41.390205;
-        barcelona.longitude = 2.154007;
-
-        try {
-            getCityDao().create(dublin);
-            getCityDao().create(london);
-            getCityDao().create(newYork);
-            getCityDao().create(barcelona);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    private void initCities(Dao<City, Integer> cityDao, List<City> cities) {
+        for (City city : cities) {
+            try {
+                cityDao.create(city);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public Dao<City, Integer> getCityDao() throws SQLException {
+    private Dao<City, Integer> getCityDao() throws SQLException {
         if (cityDao == null) {
             cityDao = getDao(City.class);
         }

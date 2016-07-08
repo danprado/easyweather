@@ -30,7 +30,6 @@ public class MainApplication extends Application {
         diComponent = DaggerDiComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .networkModule(new NetworkModule(getString(R.string.BASE_URL)))
-                .dbModule(new DbModule(new DatabaseHelper(this)))
                 .build();
     }
 
