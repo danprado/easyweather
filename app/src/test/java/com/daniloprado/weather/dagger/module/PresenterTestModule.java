@@ -1,7 +1,5 @@
 package com.daniloprado.weather.dagger.module;
 
-import android.content.Context;
-
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.data.repository.ForecastRepository;
 import com.daniloprado.weather.view.cityadd.CityAddContract;
@@ -11,25 +9,23 @@ import com.daniloprado.weather.view.cityforecast.CityForecastPresenter;
 import com.daniloprado.weather.view.citylist.CityListContract;
 import com.daniloprado.weather.view.citylist.CityListPresenter;
 
-import dagger.Module;
-import dagger.Provides;
+import org.mockito.Mockito;
 
-@Module
-public class PresenterModule {
+public class PresenterTestModule extends PresenterModule {
 
-    @Provides
+    @Override
     public CityListContract.Presenter provideCityListPresenter(CityRepository cityRepository) {
-        return new CityListPresenter(cityRepository);
+        return Mockito.mock(CityListPresenter.class);
     }
 
-    @Provides
+    @Override
     public CityForecastContract.Presenter provideCityForecastPresenter(ForecastRepository forecastRepository) {
-        return new CityForecastPresenter(forecastRepository);
+        return Mockito.mock(CityForecastPresenter.class);
     }
 
-    @Provides
+    @Override
     public CityAddContract.Presenter provideCityAddPresenter(CityRepository cityRepository) {
-        return new CityAddPresenter(cityRepository);
+        return Mockito.mock(CityAddPresenter.class);
     }
 
 }

@@ -26,13 +26,11 @@ import rx.schedulers.Schedulers;
 public class CityRepositoryImpl implements CityRepository {
 
     private Context context;
-    private DatabaseHelper databaseHelper;
     private RuntimeExceptionDao<City, Integer> cityDao;
 
     @Inject
-    public CityRepositoryImpl(Context context, DatabaseHelper databaseHelper, @Named("CityDao") RuntimeExceptionDao<City, Integer> cityDao) {
+    public CityRepositoryImpl(Context context, @Named("CityDao") RuntimeExceptionDao<City, Integer> cityDao) {
         this.context = context;
-        this.databaseHelper = databaseHelper;
         this.cityDao = cityDao;
     }
 

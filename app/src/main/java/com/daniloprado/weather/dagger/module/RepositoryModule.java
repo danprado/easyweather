@@ -21,8 +21,8 @@ import dagger.Provides;
 public class RepositoryModule {
 
     @Provides
-    CityRepository provideCityRepository(Context context, DatabaseHelper databaseHelper, @Named("CityDao") RuntimeExceptionDao<City, Integer> cityDao) {
-        return new CityRepositoryImpl(context, databaseHelper, cityDao);
+    CityRepository provideCityRepository(Context context, @Named("CityDao") RuntimeExceptionDao<City, Integer> cityDao) {
+        return new CityRepositoryImpl(context, cityDao);
     }
 
     @Provides
