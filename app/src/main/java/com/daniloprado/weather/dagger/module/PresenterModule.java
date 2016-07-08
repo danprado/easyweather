@@ -1,7 +1,5 @@
 package com.daniloprado.weather.dagger.module;
 
-import android.content.Context;
-
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.data.repository.ForecastRepository;
 import com.daniloprado.weather.view.cityadd.CityAddContract;

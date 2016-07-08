@@ -2,11 +2,8 @@ package com.daniloprado.weather.dagger.module;
 
 import android.content.Context;
 
-import com.daniloprado.weather.data.db.dao.CityDao;
-import com.daniloprado.weather.data.db.dao.impl.CityDaoImpl;
 import com.daniloprado.weather.data.db.helper.DatabaseHelper;
 import com.daniloprado.weather.model.City;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 

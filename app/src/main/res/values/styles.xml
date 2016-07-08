@@ -21,7 +21,6 @@
         <item name="android:textColor">@color/bluish_white</item>
     </style>
 
-    <style name="DailyForecastCardView" parent="CardView">
-    </style>
+    <style name="DailyForecastCardView" parent="CardView"></style>
 
 </resources>

@@ -4,14 +4,11 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
-import com.daniloprado.weather.data.db.helper.DatabaseHelper;
 import com.daniloprado.weather.data.repository.CityRepository;
 import com.daniloprado.weather.model.City;
 import com.daniloprado.weather.util.PlaceUtils;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
