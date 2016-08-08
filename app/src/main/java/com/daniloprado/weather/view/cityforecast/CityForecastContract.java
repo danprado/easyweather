@@ -27,6 +27,8 @@ public interface CityForecastContract {
 
         void refreshUi();
 
+        void onDestroy();
+
     }
 
 }

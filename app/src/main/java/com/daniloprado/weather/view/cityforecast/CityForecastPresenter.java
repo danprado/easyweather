@@ -24,25 +24,37 @@ public class CityForecastPresenter implements CityForecastContract.Presenter {
 
     @Override
     public void loadData(City city) {
-        forecastRepository.getForecast(city.latitude, city.longitude).subscribe(dto -> {
-            forecastDto = dto;
-            refreshUi();
-        }, throwable -> {
-            throwable.printStackTrace();
-            view.showErrorLayout();
-        });
+        if (view != null) {
+            forecastRepository.getForecast(city.latitude, city.longitude).subscribe(dto -> {
+                forecastDto = dto;
+                refreshUi();
+            }, throwable -> {
+                throwable.printStackTrace();
+                view.showErrorLayout();
+            });
+        }
     }
 
     @Override
     public void loadDataWithProgress(City city) {
-        view.showLoadingLayout();
+        if (view != null) {
+            view.showLoadingLayout();
+        }
+
         loadData(city);
     }
 
     @Override
     public void refreshUi() {
-        view.updateForecast(forecastDto);
-        view.showContentLayout();
+        if (view != null) {
+            view.updateForecast(forecastDto);
+            view.showContentLayout();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        view = null;
     }
 
 }

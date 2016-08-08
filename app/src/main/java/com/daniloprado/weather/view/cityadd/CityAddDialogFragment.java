@@ -142,6 +142,12 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     }
 
     @Override
+    public void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
     public void setupRecyclerViewAdapter(List<City> cityList) {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);

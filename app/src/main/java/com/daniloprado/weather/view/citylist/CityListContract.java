@@ -28,6 +28,8 @@ public interface CityListContract {
 
         void deleteCity(City city);
 
+        void onDestroy();
+
     }
 
 }

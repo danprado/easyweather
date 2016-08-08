@@ -70,6 +70,12 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
         setupUi();
     }
 
+    @Override
+    public void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
+    }
+
     public void setupRecyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);

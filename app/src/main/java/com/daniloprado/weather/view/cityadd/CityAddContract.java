@@ -32,6 +32,8 @@ public interface CityAddContract {
 
         void refreshUi();
 
+        void onDestroy();
+
     }
 
 }

@@ -27,30 +27,40 @@ public class CityAddPresenter implements CityAddContract.Presenter {
 
     @Override
     public void onCitySelected(City city) {
-        if (cityRepository.checkCityExists(city.name)) {
-            view.showErrorCityAlreadyExists();
-        } else {
-            cityRepository.saveCity(city);
-            view.close(Activity.RESULT_OK);
+        if (view != null) {
+            if (cityRepository.checkCityExists(city.name)) {
+                view.showErrorCityAlreadyExists();
+            } else {
+                cityRepository.saveCity(city);
+                view.close(Activity.RESULT_OK);
+            }
         }
     }
 
     @Override
     public void searchCities(String query) {
-        view.showLoadingLayout();
-        cityRepository.searchCities(query).subscribe(cities -> {
-            cityList = cities;
-            refreshUi();
-        }, throwable -> {
-            throwable.printStackTrace();
-            view.showErrorLayout();
-        });
+        if (view != null) {
+            view.showLoadingLayout();
+            cityRepository.searchCities(query).subscribe(cities -> {
+                cityList = cities;
+                refreshUi();
+            }, throwable -> {
+                throwable.printStackTrace();
+                view.showErrorLayout();
+            });
+        }
     }
 
     @Override
     public void refreshUi() {
-        view.setupRecyclerViewAdapter(cityList);
-        view.showContentLayout();
+        if (view != null) {
+            view.setupRecyclerViewAdapter(cityList);
+            view.showContentLayout();
+        }
     }
 
+    @Override
+    public void onDestroy() {
+        view = null;
+    }
 }

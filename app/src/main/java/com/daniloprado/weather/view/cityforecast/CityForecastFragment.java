@@ -95,6 +95,12 @@ public class CityForecastFragment extends BaseFragment implements CityForecastCo
         setupUi();
     }
 
+    @Override
+    public void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
+    }
+
     private void setupUi() {
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.loadData(city));
         swipeRefreshLayout.setColorSchemeColors(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));

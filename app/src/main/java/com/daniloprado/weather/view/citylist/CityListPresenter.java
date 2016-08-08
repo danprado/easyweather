@@ -26,25 +26,34 @@ public class CityListPresenter implements CityListContract.Presenter {
 
     @Override
     public void loadData() {
-        view.showLoadingLayout();
-        cityRepository.getCities().subscribe(cities -> {
-            cityList = cities;
-            refreshUi();
-        }, throwable -> {
-            throwable.printStackTrace();
-            view.showErrorLayout();
-        });
+        if (view != null) {
+            view.showLoadingLayout();
+            cityRepository.getCities().subscribe(cities -> {
+                cityList = cities;
+                refreshUi();
+            }, throwable -> {
+                throwable.printStackTrace();
+                view.showErrorLayout();
+            });
+        }
     }
 
     @Override
     public void refreshUi() {
-        view.updateData(cityList);
-        view.showContentLayout();
+        if (view != null) {
+            view.updateData(cityList);
+            view.showContentLayout();
+        }
     }
 
     @Override
     public void deleteCity(City city) {
         cityRepository.deleteCity(city);
+    }
+
+    @Override
+    public void onDestroy() {
+        view = null;
     }
 
 }
