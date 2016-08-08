@@ -3,7 +3,6 @@ package com.daniloprado.weather.dagger;
 import com.daniloprado.weather.dagger.module.ApplicationModule;
 import com.daniloprado.weather.dagger.module.DbModule;
 import com.daniloprado.weather.dagger.module.NetworkModule;
-import com.daniloprado.weather.dagger.module.PresenterModule;
 import com.daniloprado.weather.dagger.module.RepositoryModule;
 import com.daniloprado.weather.dagger.module.ServiceModule;
 import com.daniloprado.weather.view.cityadd.CityAddDialogFragment;
@@ -20,7 +19,6 @@ import dagger.Component;
         ApplicationModule.class,
         NetworkModule.class,
         ServiceModule.class,
-        PresenterModule.class,
         RepositoryModule.class,
         DbModule.class
 })

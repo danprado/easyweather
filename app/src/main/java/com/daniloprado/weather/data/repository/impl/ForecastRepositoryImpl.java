@@ -8,11 +8,13 @@ import com.daniloprado.weather.data.repository.ForecastRepository;
 import com.daniloprado.weather.data.service.ForecastService;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+@Singleton
 public class ForecastRepositoryImpl implements ForecastRepository {
 
     private ForecastService service;

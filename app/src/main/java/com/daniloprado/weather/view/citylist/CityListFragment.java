@@ -49,7 +49,7 @@ public class CityListFragment extends ContractFragment<CityListFragment.Contract
     ViewFlipper viewFlipper;
 
     @Inject
-    CityListContract.Presenter presenter;
+    CityListPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

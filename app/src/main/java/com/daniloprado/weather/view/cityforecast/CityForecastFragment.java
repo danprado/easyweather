@@ -69,7 +69,7 @@ public class CityForecastFragment extends BaseFragment implements CityForecastCo
     ViewFlipper viewFlipper;
 
     @Inject
-    CityForecastContract.Presenter presenter;
+    CityForecastPresenter presenter;
 
     private City city = new City();
 
