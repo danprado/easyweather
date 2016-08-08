@@ -38,3 +38,8 @@ The application is divided in three main packages: Model, Data and View.
 4. **ORMLite**
 5. **Gson**
 6. **Dagger**
+
+### API Key
+I have removed the API Key exposure on the code. It is now located in my ~/.gradle/gradle.properties file as "apiKey=INSERT_YOUR_API_KEY_HERE".
+If you want to test the app, you will have to put your own API Key as in your gradle.properties file as mentioned above.
+You can get your API Key here: https://developer.forecast.io/
