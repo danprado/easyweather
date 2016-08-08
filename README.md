@@ -40,6 +40,6 @@ The application is divided in three main packages: Model, Data and View.
 6. **Dagger**
 
 ### API Key
-I have removed the API Key exposure on the code. It is now located in my ~/.gradle/gradle.properties file as "apiKey=INSERT_YOUR_API_KEY_HERE".
-If you want to test the app, you will have to put your own API Key as in your gradle.properties file as mentioned above.
+After some feedbacks, I have removed the API Key exposure in this code. It is now located in my local ~/.gradle/gradle.properties file as "apiKey=INSERT_YOUR_API_KEY_HERE". You can see how I read this value in the app's build.gradle file.
+If you want to test the app, you will have to put your own API Key in your gradle.properties file as mentioned above.
 You can get your API Key here: https://developer.forecast.io/
