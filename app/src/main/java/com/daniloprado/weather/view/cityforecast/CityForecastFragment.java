@@ -26,7 +26,6 @@ import com.daniloprado.weather.widget.DailyWeatherView;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CityForecastFragment extends BaseFragment implements CityForecastContract.View {
 
@@ -89,7 +88,6 @@ public class CityForecastFragment extends BaseFragment implements CityForecastCo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
         presenter.setView(this);
         presenter.loadDataWithProgress(city);
         setupUi();

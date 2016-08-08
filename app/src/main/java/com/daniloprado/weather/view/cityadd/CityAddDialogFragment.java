@@ -35,7 +35,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CityAddDialogFragment extends BaseDialogFragment implements CityAddContract.View {
 
@@ -80,7 +79,6 @@ public class CityAddDialogFragment extends BaseDialogFragment implements CityAdd
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
         presenter.setView(this);
         initToolbar();
         setupUi();
