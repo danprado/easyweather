@@ -1,4 +1,4 @@
-# Description
+# Description - A MVP example
 This project was an Android Challenge I was assigned to.
 After completing it, I decided to share it as a sample project using MVP + RxJava and Dagger. Of course it needs improvement so it would be a great oppotunity to learn and get new ideas about best practices, MVP, Dependency Injection and unit tests.
 Feel free to share ideas, suggestions and PRs! =)
