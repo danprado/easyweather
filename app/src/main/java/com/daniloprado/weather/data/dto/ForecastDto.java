@@ -10,7 +10,7 @@ public class ForecastDto implements Serializable {
     public double latitude;
     public double longitude;
     public String timezone;
-    public Integer offset;
+    public Double offset;
     public Currently currently;
     public Daily daily;
 
