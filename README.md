@@ -1,3 +1,6 @@
+# This architectural approach is outdated
+Please, follow Google's samples and use MVVM with the Architecture Components (especially ViewModel).
+
 # Description - An MVP example
 This project was an Android Challenge I was assigned to.
 After completing it, I decided to share it as a sample project using MVP + RxJava and Dagger. Of course it needs improvement so it would be a great opportunity to learn and get new ideas about best practices, MVP, Dependency Injection and unit tests.
